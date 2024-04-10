@@ -1,6 +1,6 @@
 import React from 'react';
-import {Tour} from "@/actions/prisma";
 import Link from "next/link";
+import {Tour} from "@prisma/client";
 
 const TourCard = ({tour}: { tour:Tour }) => {
     const {id, city, country} = tour

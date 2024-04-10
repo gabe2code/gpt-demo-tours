@@ -1,6 +1,6 @@
 import React from 'react';
-import {Tour} from "@/actions/prisma";
 import TourCard from "@/components/TourCard";
+import {Tour} from "@prisma/client";
 
 
 const TourList = ({tours}: { tours?: Tour[] }) => {

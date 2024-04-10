@@ -1,8 +1,9 @@
 'use client'
 import {useState} from 'react';
 import {useQuery} from "@tanstack/react-query";
-import {getTours, Tour} from "@/actions/prisma";
+import {getTours} from "@/actions/prisma";
 import TourList from "@/components/TourList";
+import {Tour} from "@prisma/client";
 
 const ToursPage = () => {
     const [searchValue, setSearchValue] = useState("");
