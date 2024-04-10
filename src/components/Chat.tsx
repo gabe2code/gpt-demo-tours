@@ -18,9 +18,9 @@ const Chat = () => {
     const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
     const {mutate, isPending} = useMutation({
         mutationFn: async (query: any) => {
-             const currentTokens = await fetchUserTokensById(userId);
+             const currentTokens = await fetchUserTokensById(userId!);
 
-            if (currentTokens < 100) {
+            if (currentTokens && currentTokens < 100) {
                 toast.error('Token balance too low....');
                 return;
             }
@@ -32,7 +32,7 @@ const Chat = () => {
                 return;
             }
             setMessages((prev) => [...prev, response.message]);
-             const newTokens = await decreaseTokensById(userId, response.tokens);
+             const newTokens = await decreaseTokensById(userId!, response.tokens);
             toast.success(` tokens remaining... ${newTokens}`);
         },
     });

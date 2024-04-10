@@ -5,6 +5,7 @@ import {fetchOrCreateUserById} from "@/actions/prisma";
 const MemberProfile = async () => {
     const user = await currentUser()
     const {userId} = auth();
+    if (userId)
     await fetchOrCreateUserById(userId)
     return (
         <div className='px-4 flex items-center gap-2'>

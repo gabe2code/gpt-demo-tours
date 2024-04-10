@@ -54,7 +54,7 @@ export const getSingleTour = async (id: string) => {
     });
 }
 
-export const fetchUserTokensById = async (clerkId: undefined | null | string) => {
+export const fetchUserTokensById = async (clerkId: undefined | string) => {
     const result = await prisma.token.findUnique({where: {clerkId}})
     return result?.tokens;
 }
@@ -65,17 +65,18 @@ export const createUserByToken = async (clerkId: string) => {
             clerkId
         }
     })
+    return result?.tokens;
 }
 
-export const fetchOrCreateUserById = async (clerkId: string | null) => {
-    const existingUser = await prisma.token.findUnique({where: {clerkId}});
-    if (existingUser) {
-        return existingUser;
+export const fetchOrCreateUserById = async (clerkId: string) => {
+    const existingUserTokens = await fetchUserTokensById(clerkId);
+    if (existingUserTokens) {
+        return existingUserTokens;
     }
-    return (await prisma.token.create({data: {clerkId}}));
+    return (createUserByToken(clerkId));
 }
 
-export const decreaseTokensById = async (clerkId: undefined | null | string, tokens: number | undefined) => {
+export const decreaseTokensById = async (clerkId: undefined | string, tokens: number | undefined) => {
     const results = await prisma.token.update({
         where: { clerkId },
         data: { tokens: { decrement: tokens } },

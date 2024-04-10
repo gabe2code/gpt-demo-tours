@@ -18,8 +18,8 @@ const NewTour = () => {
             if (existingTour) {
                 return existingTour;
             }
-            const currentTokens = await fetchUserTokensById(userId);
-            if (currentTokens < 200) {
+            const currentTokens = await fetchUserTokensById(userId!);
+            if (currentTokens && currentTokens < 200) {
                 toast.error('Insufficient tokens...');
                 return null;
             }
@@ -27,7 +27,7 @@ const NewTour = () => {
             if (newTour) {
                 await createNewTour(newTour.tour);
                 await queryClient.invalidateQueries({queryKey: ['tours']})
-                const newTokens = await decreaseTokensById(userId, newTour.tokens)
+                const newTokens = await decreaseTokensById(userId!, newTour.tokens)
                 toast.success(`${newTokens} tokens remaining...`)
                 return newTour.tour
             }
