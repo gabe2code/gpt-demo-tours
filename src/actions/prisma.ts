@@ -2,17 +2,6 @@
 import prisma from "@/utils/db";
 import {revalidatePath} from "next/cache";
 
-export type Tour = {
-    id: string;
-    title: string;
-    description: string;
-    image: string | undefined;
-    stops: string[];
-    city: string;
-    country: string;
-    createdAt: Date
-    updatedAt: Date
-}
 
 export const getExistingTour = async ({city, country}: { city: string, country: string }) => {
     return prisma.tour.findUnique({
@@ -24,7 +13,7 @@ export const getExistingTour = async ({city, country}: { city: string, country: 
     })
 }
 
-export const createNewTour = async (tour: Tour) => {
+export const createNewTour = async (tour: any) => {
     return prisma.tour.create({
         data: tour
     })
