@@ -6,11 +6,12 @@ import {redirect} from "next/navigation";
 import {generateTourImage} from "@/actions/openIA";
 import Image from "next/image";
 import axios from "axios";
+import {Tour} from "@prisma/client";
 
 const url = `https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_API_KEY}&query=`;
 
 const SingleTourPage = async ({params}: { params: { id: string } }) => {
-    const tour = await getSingleTour(params.id)
+    const tour = await getSingleTour(params.id) as Tour
     if (!tour) {
         return redirect('/tours')
     }
