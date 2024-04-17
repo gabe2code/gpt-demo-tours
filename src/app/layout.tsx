@@ -8,7 +8,7 @@ import Providers from "@/app/providers";
 const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
-    title: "GPT Genius",
+    title: "Tour Planning AI",
     description: "Integration with OpenIA",
 };
 
@@ -20,7 +20,6 @@ export default function RootLayout({
 
     return (
         <ClerkProvider>
-
             <html lang="en" data-theme="winter">
                 <body className={inter.className}>
                     <Providers>{children}</Providers>

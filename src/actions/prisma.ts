@@ -1,13 +1,14 @@
 'use server'
 import prisma from "@/utils/db";
 import {revalidatePath} from "next/cache";
+import {TourDuration, TourType} from "@/utils/types";
 
 
-export const getExistingTour = async ({city, country}: { city: string, country: string }) => {
+export const getExistingTour = async ({city, country, tourType, duration}: { city: string, country: string, tourType: TourType, duration: TourDuration }) => {
     return prisma.tour.findUnique({
         where: {
-            city_country: {
-                city, country
+            city_country_tourType_duration: {
+                city, country, tourType, duration
             }
         }
     })

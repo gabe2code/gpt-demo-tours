@@ -20,11 +20,13 @@ model Tour {
   city        String
   country     String
   title       String
+  tourType    String
+  duration    String
   description String   @db.Text
   image       String?  @db.Text
   stops       Json
 
-  @@unique([city, country])
+  @@unique([city, country, tourType, duration])
 }
 
 model Token {

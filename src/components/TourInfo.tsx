@@ -1,7 +1,5 @@
 'use client'
 
-
-
 import {Tour} from "@prisma/client";
 
 const TourInfo = ({tour}: {tour: Tour}) => {
